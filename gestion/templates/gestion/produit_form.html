@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Créer un produit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 font-sans flex items-center flex-col">
+
+    <h1 class="text-2xl font-bold mb-4 ">Créer un produit</h1>
+
+    <form method="post" class="bg-grey-100 p-6 rounded shadow max-w-md">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+            Enregistrer
+        </button>
+    </form>
+
+    <p class="mt-4">
+        <a href="{% url 'produit_list' %}" class="text-blue-600 hover:underline">Retour à la liste</a>
+    </p>
+
+</body>
+</html>
