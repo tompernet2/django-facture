@@ -27,7 +27,7 @@ Objectif :
 
 ## 🧰 Technologies utilisées
 
-- **Backend :** Django 5.x (Python 3.12)
+- **Backend :** Django 
 - **Frontend :** HTML5, Tailwind CSS
 - **Base de données :** SQLite (par défaut)
 - **Autres :**
