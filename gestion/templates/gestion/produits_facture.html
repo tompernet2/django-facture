@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Créer une facture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 font-sans flex items-center flex-col min-h-screen">
+    
+
+    <h1 class="text-2xl font-bold mb-6">Sélectionne les produits pour la facture</h1>
+
+    {% if messages %}
+        <ul class="mb-4 w-full max-w-2xl">
+            {% for message in messages %}
+                <li class="bg-red-100 text-red-700 font-medium py-2 px-4 rounded">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    
+    <form method="post" action="{% url 'facture_create' %}" class="w-full max-w-2xl" id="facture-form">
+
+
+        <div class="flex justify-center items-center gap-2 mb-6 w-full max-w-2xl">
+            <a class="mb-6 bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700" href="{% url 'liste_factures' %}">
+                Retour
+            </a>
+            <button type="submit" class="mb-6 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
+                Créer la facture
+            </button>
+            
+        </div>
+
+        {% csrf_token %}
+
+        {% if produits %}
+            <ul class="space-y-4">
+                {% for produit in produits %}
+                    <li class="bg-white p-4 rounded shadow flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-lg">{{ produit.nom }}</p>
+                            <p class="text-gray-600">{{ produit.prix }} € — périme le {{ produit.date_peremption|date:"d/m/Y" }}</p>
+                        </div>
+                        <div>
+                            <input 
+                                type="checkbox" 
+                                name="produits_selectionnes" 
+                                value="{{ produit.id }}"
+                            >
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun produit disponible.</p>
+        {% endif %}
+
+    </form>
+
+<script>
+    document.getElementById("facture-form").addEventListener("submit", function(e) {
+        const checkboxes = document.querySelectorAll('input[name="produits_selectionnes"]:checked');
+        if (checkboxes.length === 0) {
+            e.preventDefault();
+            alert("Veuillez sélectionner au moins un produit pour créer une facture.");
+        }
+    });
+</script>
+
+</body>
+</html>

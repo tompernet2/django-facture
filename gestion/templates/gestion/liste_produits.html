@@ -9,9 +9,15 @@
 
     <h1 class="text-2xl font-bold mb-6">Liste des produits</h1>
 
-    <a class="mb-6 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700" href="{% url 'produit_create' %}">
-        Créer un produit
-    </a>
+    <div class="flex gap-2">
+      
+      <a class="mb-6 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700" href="{% url 'produit_create' %}">
+          Créer un produit
+      </a>
+      <a class="mb-6 bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700" href="{% url 'liste_factures' %}">
+          Voir les factures
+      </a>
+    </div>
 
 {% comment %} PAGINATION {% endcomment %}
     <div class="pagination mb-6 flex justify-center space-x-2">
